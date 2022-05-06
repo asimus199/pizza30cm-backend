@@ -23,7 +23,8 @@ router.get('/', (req, res) => {
   res.write('<h1>Hello from Express.js!</h1>');
   res.end();
 });
-
+router.get('/another', (req, res) => res.json({ route: req.originalUrl }));
+router.post('/', (req, res) => res.json({ postBody: req.body }));
 
 // bot.telegram.sendMessage(ordersChatId, '[](tg://user?id=53476657)', { parse_mode: 'MarkdownV2' })
 router.post('/order', async (req, res) => {
@@ -100,7 +101,7 @@ ${itemsList}
 router.post('/', (req, res) => res.json({ postBody: req.body }));
 
 app.use(bodyParser.json());
-app.use('/bot', router);  // path must route to lambda
+app.use('/.netlify/functions/server', router);  // path must route to lambda
 app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
 
 bot.launch()
