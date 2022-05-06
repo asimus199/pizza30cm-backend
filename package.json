@@ -21,7 +21,11 @@
     "url": "https://github.com/neverendingqs/netlify-express/issues"
   },
   "homepage": "https://github.com/neverendingqs/netlify-express#readme",
-  "dependencies": {},
+  "dependencies": {
+    "moment-timezone": "^0.5.34",
+    "querystring": "^0.2.1",
+    "telegraf": "^4.8.1"
+  },
   "devDependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
