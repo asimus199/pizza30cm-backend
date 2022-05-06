@@ -5,9 +5,8 @@ const querystring = require('querystring');
 const serverless = require('serverless-http');
 const app = express();
 const bodyParser = require('body-parser');
-const moment = require('moment-timezone')
-const { Telegraf, Markup } = require('telegraf')
 let ordersChatId = -507976908;
+const Telegraf = require('telegraf')
 
 const router = express.Router();
 router.get('/', (req, res) => {
