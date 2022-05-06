@@ -76,18 +76,26 @@ ${itemsList}
 💬 Пятиэтажное здание во дворе
   `
   console.log(message)
-  await bot.telegram.answerWebAppQuery(query_id, {
-    "type": "article",
-    "id": "1",
-    "title": "chek inline keybord ",
-    "description": "test ",
-    "caption": "caption",
-    "input_message_content": {
-      "message_text": message,
-      "parse_mode": 'MarkdownV2',
-    }
-  })
-  await bot.telegram.sendMessage(ordersChatId, messageManager, { "parse_mode": 'MarkdownV2'})
+  try {
+    await bot.telegram.answerWebAppQuery(query_id, {
+      "type": "article",
+      "id": "1",
+      "title": "chek inline keybord ",
+      "description": "test ",
+      "caption": "caption",
+      "input_message_content": {
+        "message_text": message,
+        "parse_mode": 'MarkdownV2',
+      }
+    })
+  } catch (e) {
+    console.log(e)
+  }
+  try {
+    await bot.telegram.sendMessage(ordersChatId, messageManager, { "parse_mode": 'MarkdownV2'})
+  } catch (e) {
+    console.log(e)
+  }
   res.json({success: true})
 });
 
