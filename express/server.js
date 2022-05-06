@@ -47,6 +47,10 @@ router.post('/order', async (req, res) => {
   var date = moment();
   let time = date.tz('Europe/Moscow').format("DD.MM.yyyy HH:mm");
   time = time.replace(/\./g, "\\.");
+  let phone = order.phone.replace(/\+/g, "\\+");
+  phone = time.replace(/\(/g, "\\(");
+  phone = time.replace(/\)/g, "\\)");
+  phone = time.replace(/\-/g, "\\-");
 
   let payMethod = order.payMethod === 'yookassa' ? '\\(Оплата ЮKassa\\)' : '\\(Оплата при получении\\)'
   let message = `
@@ -57,9 +61,9 @@ ${itemsList}
 
 💵 *${order.price}₽* ${payMethod}
 ‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
-☎️ *\\+7 \\(911\\) 731\\-61\\-05*
-🚚 Проспект тп тп
-💬 Пятиэтажное здание во дворе
+☎️ *${phone}*
+🚚 ${order.address}
+💬 ${order.comment}
   `;
 
   let messageManager = `
