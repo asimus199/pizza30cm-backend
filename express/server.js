@@ -16,12 +16,6 @@ bot.start((ctx) => {
 })
 bot.help((ctx) => ctx.reply('Send me a sticker'))
 bot.hears('hi', (ctx) => ctx.reply('Hey there'))
-bot.launch()
-
-// Enable graceful stop
-process.once('SIGINT', () => bot.stop('SIGINT'))
-process.once('SIGTERM', () => bot.stop('SIGTERM'))
-
 
 const router = express.Router();
 router.get('/', (req, res) => {
@@ -106,8 +100,13 @@ ${itemsList}
 router.post('/', (req, res) => res.json({ postBody: req.body }));
 
 app.use(bodyParser.json());
-app.use('/.netlify/functions/server', router);  // path must route to lambda
+app.use('/bot', router);  // path must route to lambda
 app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
+
+bot.launch()
+// Enable graceful stop
+process.once('SIGINT', () => bot.stop('SIGINT'))
+process.once('SIGTERM', () => bot.stop('SIGTERM'))
 
 
 module.exports = app;
